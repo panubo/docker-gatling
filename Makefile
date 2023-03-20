@@ -19,7 +19,7 @@ clean: ## Remove built image
 	docker rmi $(IMAGE_NAME):$(TAG)
 
 bash: ## Runs bash in the container
-	docker run --rm -it --entrypoint /bin/bash -v $(shell pwd)/user-files:/opt/gatling/user-files $(IMAGE_NAME):$(TAG)
+	docker run --rm -it --entrypoint /bin/bash -v $(shell pwd)/user-files:/opt/gatling/user-files -v $(shell pwd)/results:/opt/gatling/results $(IMAGE_NAME):$(TAG)
 
 run: ## Runs the container with test data
-	docker run --rm -it -p 8000:8000 -v $(shell pwd)/user-files:/opt/gatling/user-files --name $(NAME) $(IMAGE_NAME):$(TAG)
+	docker run --rm -it -p 8000:8000 -v $(shell pwd)/user-files:/opt/gatling/user-files -v $(shell pwd)/results:/opt/gatling/results --name $(NAME) $(IMAGE_NAME):$(TAG)
